@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { RoutesService } from './routes.service';
+import { ApiManagerService } from './api-manager.service';
 
-describe('RoutesService', () => {
-  let service: RoutesService;
+describe('ApiManagerService', () => {
+  let service: ApiManagerService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(RoutesService);
+    service = TestBed.inject(ApiManagerService);
   });
 
   it('should be created', () => {

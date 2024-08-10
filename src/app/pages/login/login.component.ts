@@ -5,8 +5,9 @@ import { PasswordModule } from 'primeng/password';
 import { DividerModule } from 'primeng/divider';
 import { ButtonModule } from 'primeng/button';
 import { CardModule } from 'primeng/card';
-import { AuthService } from '../../services/auth.service';
+
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { AuthService } from '../../services/auth/auth.service';
 
 
 @Component({

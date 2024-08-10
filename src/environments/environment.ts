@@ -7,5 +7,6 @@ export const environment = {
         authDomain: 'challengeeldar-47612.firebaseapp.com',
         messagingSenderId: '575764580334',
         measurementId: 'G-N17TD3ZC6P',
-      }
+      },
+      apiUrl: 'https://jsonplaceholder.typicode.com'
 };
