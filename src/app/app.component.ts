@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { ButtonModule } from 'primeng/button';
+
 
 @Component({
   selector: 'app-root',
@@ -9,6 +10,16 @@ import { ButtonModule } from 'primeng/button';
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'challenge-eldar';
+
+  constructor( ) { }
+
+  ngOnInit() { 
+
+  // this.login()
+
+  }
+
+
 }
