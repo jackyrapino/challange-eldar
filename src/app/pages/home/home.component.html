@@ -1,8 +1,21 @@
+<p-menubar>
+    <ng-template pTemplate="start">
+    </ng-template>
+    
+    <ng-template pTemplate="end">
+        <button pButton type="button" label="Logout" icon="pi pi-power-off" (click)="logout()" class="p-button-danger"></button>
+    </ng-template>
+</p-menubar>
 <div class="search-bar">
-    <p-iconField iconPosition="left">
-        <p-inputIcon styleClass="pi pi-search" />
-        <input type="text" (ngModelChange)="search($event)" [(ngModel)]="searchText" pInputText placeholder="Search" />
-    </p-iconField>
+  <p-iconField iconPosition="left">
+    <p-inputIcon styleClass="pi pi-search" />
+    <input 
+      type="text" 
+      (ngModelChange)="search($event)" 
+      [(ngModel)]="searchText" 
+      pInputText 
+      placeholder="Search" />
+  </p-iconField>
 </div>
 
 <section class="container-post">
@@ -16,5 +29,5 @@
     (onPageChange)="onPageChange($event)" 
     [first]="first"
     [rows]="rows" 
-    [totalRecords]="120" 
-    [rowsPerPageOptions]="[10, 20, 30]" />
+    [totalRecords]="posts.length" 
+    [rowsPerPageOptions]="[10, 15, 20]" />
