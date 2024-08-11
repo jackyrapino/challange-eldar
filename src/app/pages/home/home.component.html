@@ -1,1 +1,20 @@
-<p>home works!</p>
+<div class="search-bar">
+    <p-iconField iconPosition="left">
+        <p-inputIcon styleClass="pi pi-search" />
+        <input type="text" (ngModelChange)="search($event)" [(ngModel)]="searchText" pInputText placeholder="Search" />
+    </p-iconField>
+</div>
+
+<section class="container-post">
+    @for (post of paginatedPosts ; track $index) {
+
+        <app-card-post [post]="post"></app-card-post>
+    }
+</section>
+
+<p-paginator 
+    (onPageChange)="onPageChange($event)" 
+    [first]="first"
+    [rows]="rows" 
+    [totalRecords]="120" 
+    [rowsPerPageOptions]="[10, 20, 30]" />
