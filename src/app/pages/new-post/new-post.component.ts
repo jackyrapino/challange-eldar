@@ -5,6 +5,7 @@ import {
   FormGroup,
   FormsModule,
   ReactiveFormsModule,
+  Validators,
 } from '@angular/forms';
 import { Router } from '@angular/router';
 import { InputTextModule } from 'primeng/inputtext';
@@ -56,8 +57,8 @@ export class NewPostComponent implements OnInit {
 
   initForm() {
     this.newPostForm = this.fb.group({
-      title: [''],
-      body: [''],
+      title: ['', [Validators.required]],
+      body: ['', [Validators.required]],
     });
 
     if (this.postEdit) {

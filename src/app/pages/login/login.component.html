@@ -3,13 +3,19 @@
         <form [formGroup]="loginForm" class="flex flex-column md:flex-row">
             <div class="w-full flex flex-column align-items-center justify-content-center gap-3 py-5">
                 <div class="flex flex-wrap justify-content-center align-items-center gap-2">
-                    <label class="w-6rem">Username</label>
+                    <label class="w-6rem">Email</label>
                     <input formControlName="email" pInputText id="username" type="text" class="w-12rem" />
                 </div>
+                <small class="p-error  col-offset-5" *ngIf="loginForm.get('email')?.hasError('email') && !loginForm.get('email')?.hasError('required')">
+                    Please enter a valid email.
+                </small>
                 <div class="flex flex-wrap justify-content-center align-items-center gap-2">
                     <label class="w-6rem">Password</label>
                     <input formControlName="password" pInputText id="password" type="password" class="w-12rem" />
                 </div>
+                <small class="p-error  col-offset-4" *ngIf="loginForm.get('password')?.hasError('minlength')">
+                    Please enter a valid password.
+                </small>
                 <p-button [disabled]="!loginForm.valid" (onClick)="login()" label="Login" icon="pi pi-user" styleClass="w-10rem mx-auto" />
             </div>
            

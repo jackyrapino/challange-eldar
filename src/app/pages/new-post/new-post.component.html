@@ -20,6 +20,12 @@
       <input pInputText id="title" formControlName="title" />
       <label for="Title">Title</label>
     </p-floatLabel>
+    <div class="flex flex-wrap ">
+      <small class="p-error  col-12" *ngIf="newPostForm.get('title')?.hasError('required') && !newPostForm.get('title')?.markAsTouched">
+        Please enter a valid title.
+      </small>
+
+    </div>
 
     <p-floatLabel>
       <textarea
@@ -33,8 +39,17 @@
       <label for="float-input">Body</label>
     </p-floatLabel>
 
+    <div class="flex flex-wrap "> 
+
+      <small class="p-error  col-12" *ngIf="newPostForm.get('body')?.hasError('required')&& !newPostForm.get('title')?.markAsTouched">
+        Please enter a valid body.
+      </small>
+    </div>
+
+
     <div class="footer-buttons">
       <button
+      [disabled]="!newPostForm.valid"
         pButton
         type="submit"
        [label]="postEdit ? 'Update Post' : 'Submit'"
