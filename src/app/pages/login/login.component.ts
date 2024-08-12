@@ -37,7 +37,6 @@ import { CommonModule } from '@angular/common';
   styleUrl: './login.component.scss',
 })
 export class LoginComponent implements OnInit {
-  [x: string]: any;
   loginForm: FormGroup = new FormGroup({});
   showError: boolean = false;
   isLoading: boolean = false;

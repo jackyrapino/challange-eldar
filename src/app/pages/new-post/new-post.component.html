@@ -4,7 +4,7 @@
   <form
     [formGroup]="newPostForm"
     class="new-post-form"
-    (ngSubmit)="createPost()"
+
   >
     @if (postEdit) {
     <div>
@@ -21,8 +21,8 @@
       <label for="Title">Title</label>
     </p-floatLabel>
     <div class="flex flex-wrap ">
-      <small class="p-error  col-12" *ngIf="newPostForm.get('title')?.hasError('required') && !newPostForm.get('title')?.markAsTouched">
-        Please enter a valid title.
+      <small class="p-error  col-12" *ngIf="newPostForm.get('title')?.touched && (newPostForm.get('title')?.hasError('required') || newPostForm.get('title')?.hasError('minlength')) ">
+        Please enter a valid title. Title must be at least 5 characters.
       </small>
 
     </div>
@@ -41,17 +41,18 @@
 
     <div class="flex flex-wrap "> 
 
-      <small class="p-error  col-12" *ngIf="newPostForm.get('body')?.hasError('required')&& !newPostForm.get('title')?.markAsTouched">
-        Please enter a valid body.
+      <small class="p-error  col-12" *ngIf="newPostForm.get('body')?.touched && (newPostForm.get('body')?.hasError('required') || newPostForm.get('body')?.hasError('minlength'))">
+        Please enter a valid body. Body must be at least 5 characters.
       </small>
     </div>
 
 
     <div class="footer-buttons">
       <button
-      [disabled]="!newPostForm.valid && isLoading"
+      [disabled]="!newPostForm.valid && !isLoading"
         pButton
-        type="submit"
+ 
+        (click)="createPost()"
        [label]="postEdit ? 'Update Post' : 'Submit'"
        [icon]="isLoading ? 'pi pi-spin pi-spinner' : 'pi pi-check'"
         class="p-button-primary"

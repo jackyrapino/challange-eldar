@@ -60,8 +60,8 @@ export class NewPostComponent implements OnInit, OnDestroy {
 
   initForm() {
     this.newPostForm = this.fb.group({
-      title: ['', [Validators.required]],
-      body: ['', [Validators.required]],
+      title: ['', [Validators.minLength(6), Validators.required]],
+      body: ['', [Validators.minLength(6), Validators.required]],
     });
 
     if (this.postEdit) {
