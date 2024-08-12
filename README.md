@@ -48,7 +48,7 @@ Utilice Angular para desarrollar la interfaz de usuario, Firebase para la autent
 
 - environments/: Contiene las configuraciones de entorno para desarrollo y producción.
 
-##Pruebas al aplicativo
+## Pruebas al aplicativo
 
 Con los siguientes usuarios podran Iniciar sesion en el aplicativo y  realizar las respectivas tareas dependendiendo del usuario que escojan. 
 
@@ -58,6 +58,10 @@ Con los siguientes usuarios podran Iniciar sesion en el aplicativo y  realizar l
 - usuario User(simple):
   - email: user@user.com
   - password: 123456
+
+## Deploy
+- https://challengeposts.netlify.app/login
+  
 
 
 
