@@ -25,7 +25,7 @@ Utilice Angular para desarrollar la interfaz de usuario, Firebase para la autent
   - card-post/: Componente que muestra una tarjeta de post.
   - toolbar/: Componente de navegacion, logout.
 
- - guards/: Contiene las guardias de rutas que controlan el acceso basado en autenticación y roles.
+- guards/: Contiene las guardias de rutas que controlan el acceso basado en autenticación y roles.
   - auth.guard.ts: Guardia que protege rutas que requieren autenticación.
   - role.guard.ts: Guardia que protege rutas basadas en roles de usuario.
 
