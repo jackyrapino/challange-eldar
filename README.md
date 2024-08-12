@@ -55,7 +55,7 @@ Con los siguientes usuarios podran Iniciar sesion en el aplicativo y  realizar l
 - usuario Admin:
   - email: admin@admin.com
   - password: 67891011
- -usuario User(simple):
+- usuario User(simple):
   - email: user@user.com
   - password: 123456
 
