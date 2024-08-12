@@ -40,6 +40,7 @@ export class LoginComponent implements OnInit {
   [x: string]: any;
   loginForm: FormGroup = new FormGroup({});
   showError: boolean = false;
+  isLoading: boolean = false;
   constructor(
     private authService: AuthService,
     private formBuilder: FormBuilder,
@@ -54,17 +55,19 @@ export class LoginComponent implements OnInit {
 
   async login() {
     try {
+      this.isLoading = true;
       const formValues = this.loginForm.value;
-      console.log('Form Values:', formValues);
+     
       const result = await this.authService.signIn(
         formValues.email,
         formValues.password
       );
-      console.log('Login Result:', result);
+
       this.userManager.SaveUser(formValues.email);
       this.router.navigate(['/home']);
     } catch (error) {
-      console.log('Error during login:', error);
+      this.isLoading = false;
+    
       this.showError = true;
 
       this.mesageService.add({

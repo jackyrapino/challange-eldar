@@ -16,7 +16,7 @@
                 <small class="p-error  col-offset-4" *ngIf="loginForm.get('password')?.hasError('minlength')">
                     Please enter a valid password.
                 </small>
-                <p-button [disabled]="!loginForm.valid" (onClick)="login()" label="Login" icon="pi pi-user" styleClass="w-10rem mx-auto" />
+                <p-button [disabled]="!loginForm.valid && isLoading" (onClick)="login()" label="Login" [icon]="isLoading ? 'pi pi-spin pi-spinner' : 'pi pi-user'" styleClass="w-10rem mx-auto" />
             </div>
            
         </form>

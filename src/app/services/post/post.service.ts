@@ -18,7 +18,7 @@ export class PostService {
 
   addPost(post: Post) {
     this.posts.next([...this.posts.value, post]);
-    console.log(this.posts);
+  
   } 
 
   updateExistingPost(post: Post) {

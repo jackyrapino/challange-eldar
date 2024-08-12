@@ -49,18 +49,18 @@
 
     <div class="footer-buttons">
       <button
-      [disabled]="!newPostForm.valid"
+      [disabled]="!newPostForm.valid && isLoading"
         pButton
         type="submit"
        [label]="postEdit ? 'Update Post' : 'Submit'"
-        icon="pi pi-check"
+       [icon]="isLoading ? 'pi pi-spin pi-spinner' : 'pi pi-check'"
         class="p-button-primary"
       ></button>
       <button
         pButton
-        type="cancel"
-        label="Cancel"
-        icon="pi pi-times"
+        (click)="cancel($event)"
+        label="Clean"
+        icon="pi pi-eraser"
         class="p-button-danger"
       ></button>
     </div>

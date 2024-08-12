@@ -17,6 +17,7 @@ import { CardModule } from 'primeng/card';
 import { ToolbarComponent } from "../../components/toolbar/toolbar.component";
 import { PostService } from '../../services/post/post.service';
 import { concatMap, forkJoin, tap } from 'rxjs';
+import { SkeletonModule } from 'primeng/skeleton';
 
 @Component({
   selector: 'app-home',
@@ -32,7 +33,8 @@ import { concatMap, forkJoin, tap } from 'rxjs';
     ButtonModule,
     MenubarModule,
     CardModule,
-    ToolbarComponent
+    ToolbarComponent,
+    SkeletonModule
 ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
@@ -45,6 +47,7 @@ export class HomeComponent implements OnInit {
   postFiltered: Post[] = [];
   localPosts: Post[] = [];
   userLogged: any = {};
+  isLoading: boolean = true;
 
   constructor(
     private apiManagerService: ApiManagerService,
@@ -61,7 +64,7 @@ export class HomeComponent implements OnInit {
   onPageChange(event: any) {
     this.first = event.first;
     this.rows = event.rows;
-    console.log(event);
+   
   }
   get paginatedPosts() {
     return this.postFiltered.slice(this.first, this.first + this.rows);
@@ -75,20 +78,22 @@ export class HomeComponent implements OnInit {
       concatMap(() => this.postService.getPosts()),
       tap(localPosts => {
         this.localPosts = localPosts;
-        console.log('Local Posts:', this.localPosts);
-        console.log('API Posts:', this.posts);
+      
   
         this.posts = this.replacePosts(this.localPosts, this.posts);
-        console.log('Posts after replace:', this.posts);
+     
   
         this.sortPostsByIdDesc();
         this.postService.setIncrementalIdPosts(this.posts[0]);
         this.postFiltered = [...this.posts];
-        console.log('Combined Posts:', this.postFiltered);
+      
+
+        this.isLoading = false;
       })
     ).subscribe({
       error: (err) => {
         console.error('Error fetching posts:', err);
+        this.isLoading = false;
       }
     });
   }
@@ -119,14 +124,14 @@ export class HomeComponent implements OnInit {
       this.postFiltered = this.posts;
       return;
     }
-    console.log(this.searchText);
+  
     let searchText = this.searchText.toLowerCase();
     this.postFiltered = this.posts.filter(
       (post) =>
         post.title.toLowerCase().includes(searchText) ||
         post.body.toLowerCase().includes(searchText)
     );
-    console.log(this.postFiltered);
+  
   }
 
   

@@ -40,6 +40,7 @@ export class NewPostComponent implements OnInit {
   newPostForm: FormGroup = new FormGroup({});
   postEdit: Post | null = null;
   idNewPost: number = 0;
+  isLoading: boolean = false;
 
   constructor(
     private fb: FormBuilder,
@@ -72,6 +73,7 @@ export class NewPostComponent implements OnInit {
   }
 
   createPost() {
+    this.isLoading = true;
     if (this.postEdit) {
       this.updatePost();
       return;
@@ -83,7 +85,7 @@ export class NewPostComponent implements OnInit {
     };
 
     this.apiservice.createPost(post).subscribe((res) => {
-      console.log(res);
+   
       this.messageService.add({
         severity: 'success',
         summary: 'Success',
@@ -98,13 +100,14 @@ export class NewPostComponent implements OnInit {
         });
         this.router.navigate(['/home']);
      
+        this.isLoading = false;
     });
   }
 
   getpostToEdit() {
     this.postservice.getEditPost().subscribe((post) => {
       this.postEdit = post;
-      console.log(this.postEdit);
+     
     });
   }
 
@@ -127,13 +130,20 @@ export class NewPostComponent implements OnInit {
       });
       this.postservice.addPost(res);
       this.router.navigate(['/home']);
+      this.isLoading = false;
       },
       error: (err) => {
         if (err.status === 500) {
           this.postservice.updateExistingPost(post);
           this.router.navigate(['/home']);
+          this.isLoading = false;
         }
       },
     } );
+  }
+
+  cancel(e:Event){
+    e.preventDefault();
+   this.newPostForm.reset();
   }
 }
