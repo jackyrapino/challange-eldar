@@ -1,5 +1,9 @@
 <p-card class="card-post" [header]="post.title | uppercase" [style]="{width: '80vw'}">
+    <div class="edit-post" (click)="goToEditPost()">
+        <i class="pi pi-pen-to-square"></i>
+    </div>
     <p class="m-0 card-post-body" >
         {{post.body}}
     </p>
+   
 </p-card>

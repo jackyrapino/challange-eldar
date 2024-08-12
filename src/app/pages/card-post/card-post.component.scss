@@ -1,5 +1,28 @@
 .card-post {
+  position: relative;
   &-body::first-letter {
     text-transform: uppercase;
   }
+}
+
+.edit-post {
+  cursor: pointer;
+  position: absolute;
+  right: 20px;
+  top:20px;
+  i{
+    font-size: 1.5em;
+    &:hover {
+      scale:1.3;
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .edit-post {
+  bottom: 20px;
+  top:unset;
+  }
+
+
 }

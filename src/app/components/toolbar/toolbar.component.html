@@ -1,0 +1,12 @@
+<p-menubar>
+    @if(showButtonHome){
+        <ng-template pTemplate="start">
+            <button pButton type="button" label="Home" icon="pi pi-home" (click)="gotoHome()" class="p-button-primary"></button>
+        </ng-template>
+        
+    }
+    
+    <ng-template pTemplate="end">
+        <button pButton type="button" label="Logout" icon="pi pi-sign-out" (click)="logout()" class="p-button-danger"></button>
+    </ng-template>
+</p-menubar>

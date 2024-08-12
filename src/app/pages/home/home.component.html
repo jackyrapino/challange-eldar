@@ -1,11 +1,4 @@
-<p-menubar>
-    <ng-template pTemplate="start">
-    </ng-template>
-    
-    <ng-template pTemplate="end">
-        <button pButton type="button" label="Logout" icon="pi pi-power-off" (click)="logout()" class="p-button-danger"></button>
-    </ng-template>
-</p-menubar>
+<app-toolbar></app-toolbar>
 <div class="search-bar">
   <p-iconField iconPosition="left">
     <p-inputIcon styleClass="pi pi-search" />
@@ -19,15 +12,26 @@
 </div>
 
 <section class="container-post">
+    @if (!searchText) {
+        <p-card (click)="goToNewPost()" [style]="{width: '80vw' }">
+            <div class="new-post">
+                NEW POST
+                <i class="pi pi-plus-circle" style="font-size: 1.5rem"></i>
+            </div>
+        </p-card>
+    }
     @for (post of paginatedPosts ; track $index) {
 
         <app-card-post [post]="post"></app-card-post>
     }
 </section>
 
-<p-paginator 
-    (onPageChange)="onPageChange($event)" 
-    [first]="first"
-    [rows]="rows" 
-    [totalRecords]="posts.length" 
-    [rowsPerPageOptions]="[10, 15, 20]" />
+<footer class="footer">
+    <p-paginator 
+        (onPageChange)="onPageChange($event)" 
+        [first]="first"
+        [rows]="rows" 
+        [totalRecords]="posts.length" 
+        [rowsPerPageOptions]="[10, 15, 20]" />
+
+</footer>

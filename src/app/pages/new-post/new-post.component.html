@@ -1,0 +1,43 @@
+<app-toolbar></app-toolbar>
+
+<section class="container-new-post">
+    <form [formGroup]="newPostForm" class="new-post-form" (ngSubmit)="createPost()">
+        
+        <h1>NEW POST</h1>
+        <p-floatLabel>
+            <input pInputText id="title" formControlName="title" />
+            <label for="Title">Title</label>
+        </p-floatLabel>
+  
+   
+        <p-floatLabel>
+            <textarea 
+                id="float-input" 
+                rows="5" cols="30" 
+                pInputTextarea
+                formControlName="body">
+            </textarea>
+            <label for="float-input">Body</label>
+        </p-floatLabel>
+  
+  <div class="footer-buttons">
+    
+      <button 
+        pButton 
+        type="submit" 
+        label="Submit" 
+        icon="pi pi-check" 
+        class="p-button-primary"
+      ></button>
+      <button 
+      pButton 
+      type="cancel" 
+      label="Cancel" 
+      icon="pi pi-times" 
+      class="p-button-danger"
+    ></button>
+      
+
+  </div>
+    </form>
+  </section>
