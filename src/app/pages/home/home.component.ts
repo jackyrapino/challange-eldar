@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiManagerService } from '../../services/api-manager/api-manager.service';
 import { Post } from '../../interfaces/post';
-import { CardPostComponent } from '../card-post/card-post.component';
+import { CardPostComponent } from '../../components/card-post/card-post.component';
 import { IconFieldModule } from 'primeng/iconfield';
 import { InputIconModule } from 'primeng/inputicon';
 import { InputTextModule } from 'primeng/inputtext';
