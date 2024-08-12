@@ -52,12 +52,12 @@ Utilice Angular para desarrollar la interfaz de usuario, Firebase para la autent
 
 Con los siguientes usuarios podran Iniciar sesion en el aplicativo y  realizar las respectivas tareas dependendiendo del usuario que escojan. 
 
-usuario Admin:
-  -email: admin@admin.com
-  -password: 67891011
-usuario User(simple):
-  -email: user@user.com
-  -password: 123456
+- usuario Admin:
+  - email: admin@admin.com
+  - password: 67891011
+ -usuario User(simple):
+  - email: user@user.com
+  - password: 123456
 
 
 
