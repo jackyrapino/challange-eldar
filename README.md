@@ -33,20 +33,20 @@ Utilice Angular para desarrollar la interfaz de usuario, Firebase para la autent
   - post.ts: Interfaz para la estructura de un post.
   - user.ts: Interfaz para la estructura de un usuario.
 
--pages/: Contiene las diferentes páginas de la aplicación.
+- pages/: Contiene las diferentes páginas de la aplicación.
   -home/: Página principal de la aplicación.
   -login/: Página de inicio de sesión.
   -new-post/: Página para crear o editar un post.
   
--services/: Contiene los servicios que manejan la lógica de negocio.
+- services/: Contiene los servicios que manejan la lógica de negocio.
   -api-manager/: Servicio que gestiona las llamadas a la API externa.
   -auth/: Servicio de autenticación.
   -post/: Servicio que maneja la lógica relacionada con los posts.
   -user-manager/: Servicio que gestiona la información del usuario y sus roles.
 
--app.routes.ts: Configuración de rutas de la aplicación.
+- app.routes.ts: Configuración de rutas de la aplicación.
 
--environments/: Contiene las configuraciones de entorno para desarrollo y producción.
+- environments/: Contiene las configuraciones de entorno para desarrollo y producción.
 
 ##Pruebas al aplicativo
 
