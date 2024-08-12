@@ -18,8 +18,7 @@ export class CardPostComponent implements OnInit {
   constructor(private route:Router, private postService: PostService) { } 
 
 
-  ngOnInit(): void {  
-
+  ngOnInit(): void { 
 
   }
 

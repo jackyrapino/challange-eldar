@@ -78,11 +78,7 @@ export class HomeComponent implements OnInit {
       concatMap(() => this.postService.getPosts()),
       tap(localPosts => {
         this.localPosts = localPosts;
-      
-  
         this.posts = this.replacePosts(this.localPosts, this.posts);
-     
-  
         this.sortPostsByIdDesc();
         this.postService.setIncrementalIdPosts(this.posts[0]);
         this.postFiltered = [...this.posts];
@@ -133,8 +129,6 @@ export class HomeComponent implements OnInit {
     );
   
   }
-
-  
 
   goToNewPost() {
     this.router.navigate(['/new-post']);

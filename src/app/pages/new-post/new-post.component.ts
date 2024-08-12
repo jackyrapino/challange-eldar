@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ToolbarComponent } from '../../components/toolbar/toolbar.component';
 import {
   FormBuilder,
@@ -18,6 +18,7 @@ import { ToastModule } from 'primeng/toast';
 import { PostService } from '../../services/post/post.service';
 import { Post } from '../../interfaces/post';
 import { CommonModule } from '@angular/common';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-new-post',
@@ -36,7 +37,8 @@ import { CommonModule } from '@angular/common';
   templateUrl: './new-post.component.html',
   styleUrl: './new-post.component.scss',
 })
-export class NewPostComponent implements OnInit {
+export class NewPostComponent implements OnInit, OnDestroy {
+  private subscriptions = new Subscription();
   newPostForm: FormGroup = new FormGroup({});
   postEdit: Post | null = null;
   idNewPost: number = 0;
@@ -105,16 +107,15 @@ export class NewPostComponent implements OnInit {
   }
 
   getpostToEdit() {
-    this.postservice.getEditPost().subscribe((post) => {
+   const postEditSub = this.postservice.getEditPost().subscribe((post) => {
       this.postEdit = post;
      
     });
+
+    this.subscriptions.add(postEditSub);
   }
 
   updatePost() {
-
-    
-
     let post: Post = {
       title: this.newPostForm.get('title')?.value,
       body: this.newPostForm.get('body')?.value,
@@ -145,5 +146,11 @@ export class NewPostComponent implements OnInit {
   cancel(e:Event){
     e.preventDefault();
    this.newPostForm.reset();
+  }
+
+
+
+  ngOnDestroy() {
+    this.subscriptions.unsubscribe();
   }
 }
