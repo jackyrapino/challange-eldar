@@ -9,6 +9,7 @@ import { CardModule } from 'primeng/card';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AuthService } from '../../services/auth/auth.service';
 import { Router } from '@angular/router';
+import { UserManagerService } from '../../services/user-manager/user-manager.service';
 
 
 @Component({
@@ -21,7 +22,7 @@ import { Router } from '@angular/router';
 export class LoginComponent implements OnInit {
   [x: string]: any;
   loginForm:FormGroup = new FormGroup({}) 
-  constructor(private authService:AuthService, private formBuilder:FormBuilder, private router:Router) { }
+  constructor(private authService:AuthService, private formBuilder:FormBuilder, private router:Router, private userManager: UserManagerService) { }
 
   ngOnInit() { 
     this.initForm();
@@ -33,7 +34,9 @@ export class LoginComponent implements OnInit {
       console.log('Form Values:', formValues);
       const result = await this.authService.signIn(formValues.email, formValues.password);
       console.log('Login Result:', result);
+      this.userManager.SaveUser(formValues.email);
       this.router.navigate(['/home']);
+
       
     } catch (error) {
       console.error('Error during login:', error);

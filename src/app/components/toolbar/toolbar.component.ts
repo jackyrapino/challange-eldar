@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 
 import { ButtonModule } from 'primeng/button';
 import { Location } from '@angular/common';
+import { UserManagerService } from '../../services/user-manager/user-manager.service';
 
 @Component({
   selector: 'app-toolbar',
@@ -18,7 +19,8 @@ showButtonHome: boolean = false;
 constructor(
   private authService: AuthService,
   private router: Router,
-  private location: Location
+  private location: Location,
+  private userManager: UserManagerService
 ) {}
 
 ngOnInit() {  
@@ -27,6 +29,7 @@ ngOnInit() {
 
   logout() {
     this.authService.signOut().then(() => {
+      this.userManager.removeUser();
       this.router.navigate(['/login']);
     });
   }

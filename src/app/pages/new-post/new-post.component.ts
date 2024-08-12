@@ -1,8 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { ToolbarComponent } from '../../components/toolbar/toolbar.component';
-import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import {
+  FormBuilder,
+  FormGroup,
+  FormsModule,
+  ReactiveFormsModule,
+} from '@angular/forms';
 import { Router } from '@angular/router';
-import { HttpClient } from '@angular/common/http';
 import { InputTextModule } from 'primeng/inputtext';
 import { InputTextareaModule } from 'primeng/inputtextarea';
 import { ButtonModule } from 'primeng/button';
@@ -11,6 +15,8 @@ import { ApiManagerService } from '../../services/api-manager/api-manager.servic
 import { MessageService } from 'primeng/api';
 import { ToastModule } from 'primeng/toast';
 import { PostService } from '../../services/post/post.service';
+import { Post } from '../../interfaces/post';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-new-post',
@@ -22,13 +28,17 @@ import { PostService } from '../../services/post/post.service';
     InputTextareaModule,
     ButtonModule,
     FloatLabelModule,
-    ToastModule
+    ToastModule,
+    FormsModule,
+    CommonModule,
   ],
   templateUrl: './new-post.component.html',
   styleUrl: './new-post.component.scss',
 })
 export class NewPostComponent implements OnInit {
   newPostForm: FormGroup = new FormGroup({});
+  postEdit: Post | null = null;
+  idNewPost: number = 0;
 
   constructor(
     private fb: FormBuilder,
@@ -36,7 +46,9 @@ export class NewPostComponent implements OnInit {
     private apiservice: ApiManagerService,
     private messageService: MessageService,
     private postservice: PostService
-  ) {}
+  ) {
+    this.getpostToEdit();
+  }
 
   ngOnInit(): void {
     this.initForm();
@@ -47,9 +59,22 @@ export class NewPostComponent implements OnInit {
       title: [''],
       body: [''],
     });
+
+    if (this.postEdit) {
+      this.setValuesEdit();
+    }
+  }
+
+  setValuesEdit() {
+    this.newPostForm.get('title')?.setValue(this.postEdit?.title);
+    this.newPostForm.get('body')?.setValue(this.postEdit?.body);
   }
 
   createPost() {
+    if (this.postEdit) {
+      this.updatePost();
+      return;
+    }
     let post = {
       title: this.newPostForm.get('title')?.value,
       body: this.newPostForm.get('body')?.value,
@@ -62,9 +87,52 @@ export class NewPostComponent implements OnInit {
         severity: 'success',
         summary: 'Success',
         detail: 'Post created successfully',
-      })
+      });
+     
+        this.postservice.addPost({
+          title: res.title,
+          body: res.body,
+          userId: res.userId,
+          id: this.postservice.getIncrementalIdPosts(),
+        });
+        this.router.navigate(['/home']);
+     
+    });
+  }
+
+  getpostToEdit() {
+    this.postservice.getEditPost().subscribe((post) => {
+      this.postEdit = post;
+      console.log(this.postEdit);
+    });
+  }
+
+  updatePost() {
+
+    
+
+    let post: Post = {
+      title: this.newPostForm.get('title')?.value,
+      body: this.newPostForm.get('body')?.value,
+      userId: this.postEdit?.userId,
+      id: this.postEdit?.id,
+    };
+
+    this.apiservice.updatePost(post).subscribe({
+      next: (res) => {  this.messageService.add({
+        severity: 'success',
+        summary: 'Success',
+        detail: 'Post updated successfully',
+      });
       this.postservice.addPost(res);
       this.router.navigate(['/home']);
-    });
+      },
+      error: (err) => {
+        if (err.status === 500) {
+          this.postservice.updateExistingPost(post);
+          this.router.navigate(['/home']);
+        }
+      },
+    } );
   }
 }

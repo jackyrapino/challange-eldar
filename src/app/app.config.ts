@@ -9,6 +9,7 @@ import { provideHttpClient } from '@angular/common/http';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { provideMessaging } from '@angular/fire/messaging';
 import { MessageService } from 'primeng/api';
+import { FIREBASE_OPTIONS } from '@angular/fire/compat';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -20,6 +21,7 @@ export const appConfig: ApplicationConfig = {
     provideAuth(() => getAuth()),
     provideHttpClient(),
     provideAnimations(),
-    MessageService
+    MessageService,
+    { provide: FIREBASE_OPTIONS, useValue: environment.firebaseConfig }
   ],
 };

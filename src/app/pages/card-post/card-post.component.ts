@@ -3,6 +3,7 @@ import { CardModule } from 'primeng/card';
 import { Post } from '../../interfaces/post';
 import { TitleCasePipe, UpperCasePipe } from '@angular/common';
 import { Router } from '@angular/router';
+import { PostService } from '../../services/post/post.service';
 
 @Component({
   selector: 'app-card-post',
@@ -13,7 +14,8 @@ import { Router } from '@angular/router';
 })
 export class CardPostComponent implements OnInit {
   @Input() post!: Post;
-  constructor(private route:Router) { } 
+  @Input() userLogged: any;
+  constructor(private route:Router, private postService: PostService) { } 
 
 
   ngOnInit(): void {  
@@ -21,8 +23,11 @@ export class CardPostComponent implements OnInit {
 
   }
 
-  goToEditPost(){
-    this.route.navigate(['/edit-post', this.post.id])
+  goToEditPost(post: Post) {
+    this.route.navigate(['/edit-post', this.post.id]).then(() => {
+      this.postService.setEditPost(post);
+    })
+
   }
 
 

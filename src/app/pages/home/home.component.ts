@@ -44,6 +44,8 @@ export class HomeComponent implements OnInit {
   rows: number = 10;
   postFiltered: Post[] = [];
   localPosts: Post[] = [];
+  userLogged: any = {};
+
   constructor(
     private apiManagerService: ApiManagerService,
     private userManager: UserManagerService,
@@ -54,6 +56,7 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     this.getPostsAndLocalPosts();
+    this.getLoggedUser();
   }
   onPageChange(event: any) {
     this.first = event.first;
@@ -72,8 +75,14 @@ export class HomeComponent implements OnInit {
       concatMap(() => this.postService.getPosts()),
       tap(localPosts => {
         this.localPosts = localPosts;
-        this.posts = [...this.posts, ...localPosts];
+        console.log('Local Posts:', this.localPosts);
+        console.log('API Posts:', this.posts);
+  
+        this.posts = this.replacePosts(this.localPosts, this.posts);
+        console.log('Posts after replace:', this.posts);
+  
         this.sortPostsByIdDesc();
+        this.postService.setIncrementalIdPosts(this.posts[0]);
         this.postFiltered = [...this.posts];
         console.log('Combined Posts:', this.postFiltered);
       })
@@ -82,6 +91,23 @@ export class HomeComponent implements OnInit {
         console.error('Error fetching posts:', err);
       }
     });
+  }
+  
+  replacePosts(localPosts: Post[], apiPosts: Post[]): Post[] {
+    const postMap = new Map<number, Post>();
+  
+    // Primero, añadir todos los apiPosts al mapa
+    apiPosts.forEach(apiPost => {
+      if(apiPost.id) postMap.set(apiPost.id, apiPost);
+    });
+  
+    // Luego, reemplazar o añadir con los localPosts
+    localPosts.forEach(localPost => {
+    if(localPost.id) postMap.set(localPost.id, localPost);
+    });
+  
+    // Convertir el mapa de vuelta a un array de posts
+    return Array.from(postMap.values());
   }
 
   sortPostsByIdDesc() {
@@ -107,6 +133,11 @@ export class HomeComponent implements OnInit {
 
   goToNewPost() {
     this.router.navigate(['/new-post']);
+  }
+
+  getLoggedUser() {
+   this.userLogged = this.userManager.getUser()
+
   }
 
 
