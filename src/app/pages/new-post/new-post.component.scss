@@ -19,10 +19,10 @@
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
     width: 60vw;
     input{
-        width: 40vw;
+        width: 50vw;
     } 
     textarea{
-        width: 40vw;
+        width: 50vw;
     }  
 }
 
@@ -34,4 +34,10 @@
 
 p-floatLabel{
     margin-top: 15px; 
+}
+
+@media screen and (max-width: 500px) {
+    .new-post-form{
+        width: 90vw;
+    }
 }

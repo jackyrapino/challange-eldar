@@ -10,9 +10,7 @@ export class AuthService {
 
 
   async signIn(email:string,password:string){
-
-    return await signInWithEmailAndPassword(this.auth,email,password);
-    
+    return await signInWithEmailAndPassword(this.auth,email.toLowerCase(),password);
   }
 
   async signOut(){

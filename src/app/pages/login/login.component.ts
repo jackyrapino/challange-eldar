@@ -62,7 +62,7 @@ export class LoginComponent implements OnInit {
         formValues.password
       );
 
-      this.userManager.SaveUser(formValues.email);
+      this.userManager.SaveUser(formValues.email.toLowerCase());
       this.router.navigate(['/home']);
     } catch (error) {
       this.isLoading = false;
