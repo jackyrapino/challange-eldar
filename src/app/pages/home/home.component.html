@@ -6,7 +6,7 @@
         <input 
         type="text" 
         [disabled]="isLoading"
-        (ngModelChange)="search($event)" 
+        (keyup)="search()" 
         [(ngModel)]="searchText" 
         pInputText 
         placeholder="Search" />
@@ -24,8 +24,14 @@
             </p-card>
         }
         @for (post of paginatedPosts ; track $index) {
-    
             <app-card-post [userLogged]="userLogged" [post]="post"></app-card-post>
+        }
+
+        @if(paginatedPosts.length == 0) {
+            <div class="no-results">
+                <p >NO RESULTS FOUND</p>
+                <img height="300px" src="../../../assets/img/undraw_no_data_re_kwbl.svg"  />
+            </div>            
         }
     </section>
 </div>

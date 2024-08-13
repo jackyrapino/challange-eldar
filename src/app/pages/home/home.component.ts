@@ -115,7 +115,7 @@ export class HomeComponent implements OnInit {
     this.posts.sort((a: any, b: any) => b.id - a.id);
   }
 
-  search(event: Event) {
+  search() {
     if (!this.searchText) {
       this.postFiltered = this.posts;
       return;

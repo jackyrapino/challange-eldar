@@ -28,6 +28,21 @@
   font-weight: bold;
 }
 
+
+.no-results{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  font-size: 1.4em;
+  font-weight: bold;
+  flex-direction: column;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+
+
 .footer {
   position: fixed;
   bottom: 0;
