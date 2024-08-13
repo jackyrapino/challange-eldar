@@ -2,6 +2,9 @@
 
 El proyecto es una aplicación web de gestión de posts con funcionalidad de inicio de sesión. Los usuarios, dependiendo de su rol, tendrán diferentes niveles de acceso. Un usuario estándar podrá visualizar y buscar posts, mientras que un administrador, además de estas funciones, tendrá la capacidad de editar y crear nuevos posts.
 
+![image](https://github.com/user-attachments/assets/3e0a1a63-b714-4e37-ab47-1f3867d6d9b8)
+
+
 ## Ejecucion local
 En la terminal ejecutar `npm i` y luego `ng serve`
 
@@ -48,7 +51,7 @@ Utilice Angular para desarrollar la interfaz de usuario, Firebase para la autent
 
 - environments/: Contiene las configuraciones de entorno para desarrollo y producción.
 
-##Pruebas al aplicativo
+## Pruebas al aplicativo
 
 Con los siguientes usuarios podran Iniciar sesion en el aplicativo y  realizar las respectivas tareas dependendiendo del usuario que escojan. 
 
@@ -58,6 +61,10 @@ Con los siguientes usuarios podran Iniciar sesion en el aplicativo y  realizar l
 - usuario User(simple):
   - email: user@user.com
   - password: 123456
+
+## Deploy
+- https://challengeposts.netlify.app
+  
 
 
 
